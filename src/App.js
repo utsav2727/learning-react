@@ -1,23 +1,21 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import Form from './components/Form';
+import View from './components/View';
 
 function App() {
+
+  const [data, setdata] = useState([]);
+
+  const dataAddHandler = (value) => {
+    setdata(
+      [...data, value]
+    )
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Form dataAddHandler={dataAddHandler} />
+      <View data={data} />
     </div>
   );
 }
