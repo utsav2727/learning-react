@@ -1,28 +1,30 @@
-import React, { useState } from 'react'
+import React, { useRef } from 'react'
 
 const Form = (props) => {
-
-    const [fname, setFname] = useState('');
-    const [lname, setLname] = useState('');
+    const fnameref = useRef();
+    const lnameref = useRef();
 
     const submitHandler = (event) => {
         event.preventDefault();
+        console.log(fnameref);
+        const fname = fnameref.current.value;
+        const lname = lnameref.current.value;
         props.dataAddHandler({
             fname: fname,
             lname: lname,
             id: new Date()
         });
-        setFname('');
-        setLname('');
+        fnameref.current.value = '';
+        lnameref.current.value = '';
     }
 
     return (
         <div>
             <form action="/action_page.php">
-                <label for="fname">First name:</label>
-                <input type="text" id="fname" name="fname" value={fname} onChange={(event) => setFname(event.target.value)} />
-                <label for="lname">Last name:</label>
-                <input type="text" id="lname" name="lname" value={lname} onChange={(event) => setLname(event.target.value)} />
+                <label htmlFor="fname">First name:</label>
+                <input type="text" id="fname" name="fname" ref={fnameref} />
+                <label htmlFor="lname">Last name:</label>
+                <input type="text" id="lname" name="lname" ref={lnameref} />
                 <input type="submit" value="Submit" onClick={submitHandler} />
             </form >
         </div >
