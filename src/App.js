@@ -11,11 +11,11 @@ function App() {
   //   )
   // }
   return (
-    <div>
+    <>
       {/* <Form dataAddHandler={dataAddHandler} />
       <View data={data} /> */}
       <Login />
-    </div>
+    </>
   );
 }
 

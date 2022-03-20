@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import Authcontext from '../context/Authcontext'
 
-const Homepage = (props) => {
+const Homepage = () => {
+    const authcontext = useContext(Authcontext)
     return (
         <div>
             <h1>You are Logged in!</h1>
-            <button onClick={() => props.logoutHandler()}>Logout</button>
+            <button onClick={() => authcontext.logoutHandler()}>Logout</button>
         </div>
     )
 }

@@ -1,31 +1,34 @@
 import React, { useEffect, useState } from 'react'
 import '../components/login.css'
+import Authcontext from '../context/Authcontext';
 import Homepage from './Homepage';
 
 const Login = () => {
-
     const [loggedIn, setLoggedin] = useState(false);
 
     useEffect(() => {
         const storedvalue = localStorage.getItem('loggedin');
         if (storedvalue === '1') {
-            setLoggedin(true)
+            setLoggedin(true);
         }
-    }, [])
+    }, []);
 
     const submitHandler = (event) => {
         event.preventDefault();
         setLoggedin(true);
         localStorage.setItem('loggedin', '1');
-    }
+    };
 
     const logoutHandler = () => {
         localStorage.removeItem('loggedin');
         setLoggedin(false);
-    }
+    };
     return (
-        <>
-            {loggedIn === true ? <Homepage logoutHandler={logoutHandler} /> :
+        <Authcontext.Provider value={{
+            loggedIn: loggedIn,
+            logoutHandler: logoutHandler
+        }}>
+            {loggedIn === true ? <Homepage /> :
                 <div>
                     <div className="container" id="container">
                         <div className="form-container sign-in-container">
@@ -76,7 +79,7 @@ const Login = () => {
                     </div>
                 </div>
             }
-        </>
+        </Authcontext.Provider>
     )
 }
 
